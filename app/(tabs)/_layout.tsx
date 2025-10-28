@@ -1,35 +1,82 @@
-import { Tabs } from 'expo-router';
-import React from 'react';
+import { Tabs } from "expo-router";
+import { Home, TrendingUp, User, Wallet } from "lucide-react-native";
+import { View } from "react-native";
 
-import { HapticTab } from '@/components/haptic-tab';
-import { IconSymbol } from '@/components/ui/icon-symbol';
-import { Colors } from '@/constants/theme';
-import { useColorScheme } from '@/hooks/use-color-scheme';
-
-export default function TabLayout() {
-  const colorScheme = useColorScheme();
-
+const _layout = () => {
   return (
     <Tabs
       screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
         headerShown: false,
-        tabBarButton: HapticTab,
-      }}>
+        tabBarStyle: {
+          backgroundColor: "#000000",
+          borderTopWidth: 0,
+          height: 70,
+          paddingBottom: 10,
+          paddingTop: 10,
+        },
+        tabBarActiveTintColor: "#43CDF4",
+        tabBarInactiveTintColor: "#F2F2F2",
+        tabBarLabelStyle: {
+          fontSize: 12,
+          fontWeight: "600",
+          marginTop: 4,
+        },
+      }}
+    >
       <Tabs.Screen
         name="index"
         options={{
-          title: 'Home',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="house.fill" color={color} />,
+          title: "Home",
+          tabBarIcon: ({ color, focused }) => (
+            <View
+              className={`rounded-full p-2 px-6 ${focused ? "bg-blue-900" : "bg-transparent"}`}
+            >
+              <Home color={color} size={24} />
+            </View>
+          ),
         }}
       />
       <Tabs.Screen
-        name="explore"
+        name="analysis"
         options={{
-          title: 'Explore',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="paperplane.fill" color={color} />,
+          title: "Analysis",
+          tabBarIcon: ({ color, focused }) => (
+            <View
+              className={`rounded-full p-2 px-6 ${focused ? "bg-blue-900" : "bg-transparent"}`}
+            >
+              <TrendingUp color={color} size={24} />
+            </View>
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="budget"
+        options={{
+          title: "Budget",
+          tabBarIcon: ({ color, focused }) => (
+            <View
+              className={`rounded-full p-2 px-6 ${focused ? "bg-blue-900" : "bg-transparent"}`}
+            >
+              <Wallet color={color} size={24} />
+            </View>
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="profile"
+        options={{
+          title: "Profile",
+          tabBarIcon: ({ color, focused }) => (
+            <View
+              className={`rounded-full p-2 px-6 ${focused ? "bg-blue-900" : "bg-transparent"}`}
+            >
+              <User color={color} size={24} />
+            </View>
+          ),
         }}
       />
     </Tabs>
   );
-}
+};
+
+export default _layout;
